@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="title" content="Thiruvannamalai Property Trends & Plot Value Insights | Samreen Blog">
+  <meta name="description" content="Monthly tips & trends on buying plots in Thiruvannamalai, land appreciation, and local insights. Stay informed with Samreen’s expert blog.">
+  <title>Blog - Samreen Real Estate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Lato', sans-serif;
+      color: #222222;
+      background: linear-gradient(135deg, #F5F5F7, #E0ECE4);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    /* Navbar - transparent at top, fixed, changes on scroll, with logo (same size as other pages) */
+    .navbar {
+      display: flex;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: transparent;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+    .navbar.scrolled {
+      background: linear-gradient(90deg, #143642, #1A5F7A);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      margin-right: 25px;
+      min-width: 130px;
+    }
+    .logo img {
+      height: 110px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+      user-select: none;
+      transition: height 0.3s ease;
+    }
+    @media (max-width: 768px) {
+      .logo img {
+        height: 80px;
+      }
+    }
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin-left: auto;
+    }
+    .nav-menu li a {
+      text-decoration: none;
+      color: #E5E5E5;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+      padding: 0.5rem 1rem;
+      position: relative;
+    }
+    .nav-menu li a:hover, .nav-menu li a.active {
+      color: #F9AA33;
+      text-shadow: 0 0 10px #F9AA33;
+      transform: translateY(-2px);
+    }
+    .nav-menu li a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: #F9AA33;
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    .nav-menu li a:hover::after,
+    .nav-menu li a.active::after {
+      width: 100%;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      margin-left: auto;
+      padding-left: 1rem;
+    }
+    .bar {
+      width: 30px;
+      height: 4px;
+      background: #F5F5F0;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+    .hamburger.active .bar:nth-child(1) {
+      transform: translateY(10px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(3) {
+      transform: translateY(-10px) rotate(-45deg);
+    }
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+      .nav-menu {
+        position: absolute;
+        top: 100%;
+        right: 1rem;
+        background: linear-gradient(135deg, #143642, #1A5F7A);
+        flex-direction: column;
+        width: 250px;
+        display: none;
+        transition: max-height 0.3s ease-in-out, opacity 0.3s ease, transform 0.3s ease;
+        padding: 1.5rem;
+        gap: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      .nav-menu.active {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .nav-menu li a {
+        display: block;
+        padding: 0.75rem;
+        color: #E5E5E5;
+        font-size: 1.2rem;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+      .nav-menu li a:hover, .nav-menu li a.active {
+        color: #F9AA33;
+        text-shadow: 0 0 10px #F9AA33;
+        transform: translateY(-2px);
+      }
+    }
+    /* Hero Section, Blog, Sidebar, Footer ... (unchanged from your code) */
+    .hero-section {
+      background: linear-gradient(135deg, #143642, #22A699);
+      color: #FFFFFF;
+      text-align: center;
+      padding: 5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      animation: bounceIn 1s ease-out;
+      transition: background 0.3s ease;
+    }
+    .hero-section:hover {
+      background: linear-gradient(135deg, #22A699, #143642);
+    }
+    .hero-section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #FFFFFF;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.9s ease-out, opacity 0.9s ease-out;
+    }
+    .hero-section h2.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .hero-section p {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #FFFFFF;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.9s ease-out, opacity 0.9s ease-out;
+    }
+    .hero-section p.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .cta-button {
+      display: inline-block;
+      background: #F9AA33;
+      color: #143642;
+      padding: 1rem 2rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #F9AA33;
+    }
+    .cta-button:hover {
+      background: #22A699;
+      color: #E5E5E5;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #22A699;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 2rem;
+      transition: padding 0.3s ease;
+    }
+    section {
+      margin-bottom: 3rem;
+    }
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      color: #FFFFFF;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.9s ease-out, opacity 0.9s ease-out;
+    }
+    h2.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    p {
+      font-size: 1.1rem;
+      color: #FFFFFF;
+      margin-bottom: 1rem;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.9s ease-out, opacity 0.9s ease-out;
+    }
+    p.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .blog-item {
+      background: linear-gradient(135deg, #1A5F7A, #143642);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: all 0.4s ease;
+      overflow: hidden;
+      position: relative;
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    .blog-item.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .blog-item:hover {
+      transform: scale(1.05) translateY(-10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+    .blog-item h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.6rem;
+      color: #FFFFFF;
+      margin-bottom: 0.75rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .blog-item:hover h3 {
+      color: #F9AA33;
+      transform: translateX(5px);
+    }
+    .blog-item p {
+      font-size: 1rem;
+      color: #FFFFFF;
+      transition: opacity 0.3s ease;
+    }
+    .blog-item:hover p {
+      opacity: 0.9;
+    }
+    .sidebar {
+      position: sticky;
+      top: 20px;
+      background: #1A5F7A;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transform: translateX(20px);
+      opacity: 0;
+      transition: transform 0.9s ease-out, opacity 0.9s ease-out;
+    }
+    .sidebar.visible {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    .sidebar h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      color: #FFFFFF;
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease;
+    }
+    .sidebar h3:hover {
+      transform: scale(1.05);
+    }
+    .sidebar .blog-item {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: #143642;
+      transition: all 0.4s ease;
+    }
+    .sidebar .blog-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    /* Animations */
+    @keyframes bounceIn {
+      0% { transform: scale(0.9); opacity: 0; }
+      50% { transform: scale(1.05); opacity: 0.5; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    /* Footer */
+    footer {
+      background: linear-gradient(90deg, #143642, #1A5F7A);
+      color: #E5E5E5;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    footer:hover {
+      background: linear-gradient(90deg, #1A5F7A, #143642);
+      transform: translateY(-2px);
+    }
+    @media (max-width: 768px) {
+      .hero-section h2 { font-size: 2.2rem; }
+      h2 { font-size: 1.8rem; }
+      .container {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+      }
+      .sidebar { position: static; margin-top: 2rem; }
+      .hero-section { padding: 3rem 1rem; }
+      .blog-item { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="logo">
+      <img src="SAMREEN MSB Logo - Finalll PDF (1) copy.png" alt="Samreen Real Estate & Builders Logo" />
+    </a>
+    <ul class="nav-menu">
+      <li><a href="homeex.html">Home</a></li>
+      <li><a href="aboutex.html">About Us</a></li>
+      <li><a href="serviceex.html">Services</a></li>
+      <li><a href="blogex.html" class="active">Blog</a></li>
+      <li><a href="contactex.html">Contact Us</a></li>
+    </ul>
+    <button type="button" class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </nav>
+
+  <section class="hero-section">
+    <h2>Welcome to Our Knowledge Hub</h2>
+    <p>Welcome to our knowledge hub! Whether you’re a first-time buyer or a seasoned investor, get monthly updates on plot values, market trends, and insider tips about Thiruvannamalai’s ever-evolving property landscape.</p>
+    <a href="#latest-posts" class="cta-button">Explore Now</a>
+  </section>
+
+  <div class="container">
+    <div>
+      <section id="latest-posts" class="service-block">
+        <h2>Latest Posts</h2>
+        <div class="blog-grid">
+          <div class="blog-item">
+            <h3>Why Thiruvannamalai is the Next Real Estate Hotspot</h3>
+            <p>Discover why Thiruvannamalai is gaining traction in the real estate market.</p>
+          </div>
+          <div class="blog-item">
+            <h3>2025 Plot Value Trends—Best Time to Invest in Land</h3>
+            <p>Insights into the upcoming plot value trends for 2025.</p>
+          </div>
+          <div class="blog-item">
+            <h3>Checklist: What to Look for When Buying a Plot in Thiruvannamalai</h3>
+            <p>Essential tips to ensure you make the right property choice.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="service-block">
+        <h2>Monthly Content about Plots in Thiruvannamalai</h2>
+        <div class="blog-grid">
+          <div class="blog-item">
+            <h3>Gated Communities: Value and Security</h3>
+            <p>Explore the benefits of investing in gated communities.</p>
+          </div>
+          <div class="blog-item">
+            <h3>Understanding DTCP & RERA Approvals for Land Buyers</h3>
+            <p>Learn about the importance of approvals for secure land purchases.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="sidebar">
+      <h3>Featured Posts</h3>
+      <div class="blog-item">
+        <h3>2025 Plot Value Trends</h3>
+        <p>Best time to invest in land.</p>
+      </div>
+      <div class="blog-item">
+        <h3>DTCP & RERA Approvals</h3>
+        <p>Key insights for buyers.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Samreen Real Estate. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.querySelector('.hamburger');
+      const menu = document.querySelector('.nav-menu');
+      const navbar = document.querySelector('.navbar');
+
+      hamburger.addEventListener('click', () => {
+        const isActive = hamburger.classList.toggle('active');
+        menu.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isActive);
+      });
+
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menu.classList.remove('active');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!navbar.contains(e.target)) {
+          menu.classList.remove('active');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Transparent navbar becomes colored on scroll
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // Intersection Observer for animating in content
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      document.querySelectorAll('h2, p, .blog-item, .hero-section, .sidebar').forEach(element => {
+        observer.observe(element);
+      });
+    });
+  </script>
+</body>
+</html>
