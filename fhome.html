@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="title" content="Samreen Real Estate & Builders | Properties in Thiruvannamalai" />
+  <meta name="description" content="Explore properties and book free site visits with Samreen Real Estate & Builders in Thiruvannamalai. 25+ years of trusted service." />
+  <title>Samreen Real Estate & Builders</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Lato', sans-serif;
+      background: linear-gradient(135deg, #E5E5E5, #F5F5F7);
+      color: #222222;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: transparent;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      z-index: 1000;
+      transition: background 0.3s ease;
+    }
+    .navbar.scrolled {
+      background: rgba(20, 54, 66, 0.9);
+    }
+
+    .logo img {
+      height: 110px;
+      width: auto;
+      margin-right: 25px;
+      object-fit: contain;
+    }
+    @media (max-width: 600px) {
+      .logo img {
+        height: 80px;
+      }
+    }
+    @media (max-width: 480px) {
+      .logo img {
+        height: 60px;
+      }
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin-left: auto;
+    }
+    .nav-menu li a {
+      text-decoration: none;
+      color: #E5E5E5;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+    .nav-menu li a:hover, .nav-menu li a.active {
+      color: #F9AA33;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      margin-left: auto;
+      padding-left: 1rem;
+    }
+    .bar {
+      width: 30px;
+      height: 4px;
+      background: #F5F5F7;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+      .nav-menu {
+        position: fixed;
+        top: 80px;
+        right: 1rem;
+        background: rgba(20, 54, 66, 0.95);
+        flex-direction: column;
+        width: 250px;
+        display: none;
+        padding: 1.5rem;
+        gap: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        transition: opacity 0.3s ease;
+      }
+      .nav-menu.active {
+        display: flex;
+        opacity: 1;
+      }
+      .hamburger.active .bar:nth-child(1) {
+        transform: translateY(10px) rotate(45deg);
+      }
+      .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-10px) rotate(-45deg);
+      }
+      .nav-menu li a {
+        display: block;
+        padding: 0.75rem;
+        color: #E5E5E5;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+      }
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 85vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 80px; /* Offset for fixed navbar */
+      overflow: hidden;
+    }
+    .hero video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 1rem;
+      z-index: 2;
+      transition: background 0.9s ease-in-out;
+    }
+    .overlay h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem; /* Reduced for mobile */
+      color: #E5E5E5; /* White text for contrast */
+      margin-bottom: 1rem;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.9s ease-out, opacity 0.9s ease-out;
+    }
+    .overlay h1.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .overlay p {
+      font-family: 'Lato', sans-serif;
+      color: #E5E5E5; /* White text for contrast */
+      font-size: 0.9rem; /* Reduced for mobile */
+      margin-bottom: 1rem;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.9s ease-out, opacity 0.9s ease-out;
+    }
+    .overlay p.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .cta {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background: #F9AA33;
+      color: #143642;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      z-index: 3;
+      transition: background 0.6s, transform 0.3s;
+    }
+    .cta:hover {
+      background: #22A699;
+      color: #E5E5E5;
+      transform: scale(1.1);
+    }
+
+    section {
+      padding: 4rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      font-size: 1.75rem;
+      color: #143642;
+      margin-bottom: 2rem;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.9s ease-out, opacity 0.9s ease-out;
+    }
+    h2.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      width: 100%;
+      opacity: 0.1; /* Slightly visible initially */
+      transform: translateX(-50%); /* Start from left, half off-screen */
+      transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+    }
+    .cards.visible {
+      opacity: 1;
+      transform: translateX(0); /* Center the grid */
+    }
+    .card {
+      background: #ffffff; /* Keep background but remove box styling */
+      padding: 2rem;
+      text-align: center;
+      /* Removed box-shadow, border-radius for unboxed look */
+      width: 100%;
+      color: #143642; /* Ensure text is visible */
+    }
+    .card h3 {
+      font-family: 'Montserrat', sans-serif;
+      color: #143642;
+    }
+    .card:hover {
+      background: #cee2e0;
+      transform: scale(1.05);
+      transition: background 0.8s ease-in-out, transform 0.8s ease-in-out;
+    }
+    .highlights {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      text-align: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+    }
+    .highlights.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .highlight {
+      background: #ffffff;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      max-width: 280px;
+      margin: 0 auto;
+    }
+    .highlight h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      color: #22A699;
+    }
+    .highlight p {
+      font-family: 'Lato', sans-serif;
+      color: #222222;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      text-align: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+    }
+    .steps.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .steps div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .steps span {
+      background: #22A699;
+      color: #E5E5E5;
+      border-radius: 50%;
+      width: 3rem;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+    .steps p {
+      font-family: 'Lato', sans-serif;
+      color: #222222;
+    }
+    .testimonials .test-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      width: 100%;
+      opacity: 0.1; /* Slightly visible initially */
+      transform: translateX(-50%); /* Start from left, half off-screen */
+      transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+    }
+    .test-cards.visible {
+      opacity: 1;
+      transform: translateX(0); /* Center the grid */
+    }
+    .test-card {
+      background: #ffffff; /* Keep background but remove box styling */
+      padding: 1.5rem;
+      text-align: center;
+      /* Removed box-shadow, border-radius for unboxed look */
+      width: 100%;
+      color: #143642; /* Ensure text is visible */
+    }
+    .test-card:hover {
+      background: #c3d7d5;
+      transform: scale(1.05);
+      transition: background 0.9s ease, transform 0.9s ease;
+    }
+    .visual-cta {
+      background: #22A699;
+      color: #E5E5E5;
+      text-align: center;
+      padding: 3rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .visual-cta h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .cta-visual {
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      background: #E5E5E5;
+      color: #143642;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .cta-visual:hover {
+      background: #F9AA33;
+      color: #143642;
+      transform: scale(1.05);
+    }
+    footer {
+      background-color: #143642;
+      color: #E5E5E5;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 0;
+    }
+    footer p {
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+    }
+
+    /* Responsive Design */
+    @media (min-width: 768px) {
+      .cards { grid-template-columns: repeat(2, 1fr); justify-content: center; }
+      .highlights { grid-template-columns: repeat(3, 1fr); }
+      .steps { grid-template-columns: repeat(3, 1fr); }
+      .testimonials .test-cards { grid-template-columns: repeat(3, 1fr); justify-content: center; }
+      .overlay h1 { font-size: 2.5rem; }
+      .overlay p { font-size: 1.2rem; }
+    }
+
+    @media (min-width: 992px) {
+      .cards,
+      .testimonials .test-cards {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      section {
+        max-width: 1400px;
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+      .highlights {
+        max-width: 900px;
+        margin: 2rem auto;
+        gap: 2.5rem;
+      }
+      .hero {
+        height: 850px;
+        min-height: 85vh;
+      }
+      .overlay h1 { font-size: 3.5rem; }
+      .overlay p { font-size: 1.5rem; }
+      .navbar {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
+
+    @media (min-width: 1800px) {
+      body { font-size: 1.2rem; }
+      .navbar,
+      section,
+      .visual-cta {
+        max-width: 1900px;
+        padding-left: 3rem;
+        padding-right: 3rem;
+      }
+      .hero {
+        height: 980px;
+        min-height: 85vh;
+      }
+      .cards {
+        max-width: 1500px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 4rem;
+        justify-content: center;
+        align-items: center;
+      }
+      .card {
+        max-width: 450px;
+        min-height: 260px;
+      }
+      .testimonials .test-cards {
+        max-width: 1500px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 4rem;
+        justify-content: center;
+        align-items: center;
+      }
+      .test-card {
+        max-width: 450px;
+        min-height: 260px;
+      }
+      .highlights {
+        max-width: 1700px;
+        gap: 5rem;
+      }
+      .overlay h1 { font-size: 4.6rem; }
+      .overlay p { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/home" class="logo">
+      <img src="SAMREEN MSB Logo - Finalll PDF (1) copy.png" alt="Samreen Real Estate & Builders Logo - Thiruvannamalai Property Experts" />
+    </a>
+    <ul class="nav-menu">
+      <li><a href="/home" class="active">Home</a></li>
+      <li><a href="/about">About Us</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/contact">Contact Us</a></li>
+    </ul>
+    <button type="button" class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <video autoplay muted loop>
+      <source src="bgvideo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="overlay">
+      <h1 id="heroTitle">One Stop for Your Dream Property in Thiruvannamalai</h1>
+      <p>25+ years of trust and excellence in real estate</p>
+      <button class="cta">Book a Free Site Visit</button>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="cards">
+      <div class="card"><h3>Plots</h3></div>
+      <div class="card"><h3>Buildings</h3></div>
+    </div>
+  </section>
+
+  <!-- Key Highlights -->
+  <section class="highlights">
+    <div class="highlight"><h3 id="years">0+</h3><p>Years</p></div>
+    <div class="highlight"><h3 id="sites">0+</h3><p>Sites Delivered</p></div>
+    <div class="highlight"><h3 id="clients">0+</h3><p>Happy Clients</p></div>
+  </section>
+
+  <section class="how">
+    <h2>How We Work</h2>
+    <div class="steps">
+      <div><span>1</span><p>Choose Property</p></div>
+      <div><span>2</span><p>Site Visit</p></div>
+      <div><span>3</span><p>Finalize & Move In</p></div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <h2>What Our Clients Say</h2>
+    <div class="test-cards">
+      <div class="test-card">"Excellent support!" — Jane</div>
+      <div class="test-card">"Smooth process!" — John</div>
+      <div class="test-card">"Professional team!" — Sarah</div>
+    </div>
+  </section>
+
+  <section class="visual-cta">
+    <h2>Ready to Explore?</h2>
+    <button class="cta-visual">Book a Visit</button>
+  </section>
+
+  <footer>
+    <p>© 2025 Samreen Real Estate. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.querySelector('.hamburger');
+      const menu = document.querySelector('.nav-menu');
+      const navbar = document.querySelector('.navbar');
+
+      if (hamburger && menu && navbar) {
+        hamburger.addEventListener('click', () => {
+          const isActive = hamburger.classList.toggle('active');
+          menu.classList.toggle('active');
+          hamburger.setAttribute('aria-expanded', isActive);
+        });
+
+        menu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            menu.classList.remove('active');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          });
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!navbar.contains(e.target)) {
+            menu.classList.remove('active');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      function animateValue(id, start, end, duration) {
+        let startTimestamp = null;
+        const element = document.getElementById(id);
+        if (!element) return;
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          element.innerText = Math.floor(progress * (end - start) + start) + '+';
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          }
+        };
+        window.requestAnimationFrame(step);
+      }
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            if (entry.target.classList.contains('highlights')) {
+              animateValue("years", 0, 25, 2000);
+              animateValue("sites", 0, 500, 2000);
+              animateValue("clients", 0, 1000, 2000);
+            }
+          } else {
+            entry.target.classList.remove('visible'); // Remove visible class when out of viewport
+          }
+        });
+      }, { threshold: 0.3 });
+
+      const sections = document.querySelectorAll('.hero, section h2, .cards, .highlights, .steps, .test-cards');
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+
+      window.addEventListener('load', () => {
+        const h1 = document.querySelector('.overlay h1');
+        const p = document.querySelector('.overlay p');
+        if (h1 && p) {
+          requestAnimationFrame(() => {
+            h1.classList.add('visible');
+            p.classList.add('visible');
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

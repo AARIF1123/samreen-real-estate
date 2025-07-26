@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="title" content="Plots & Buildings for Sale in Thiruvannamalai | Samreen Real Estate & Builders" />
+  <meta name="description" content="Discover premium plots and quality homes in Thiruvannamalai with Samreen Real Estate & Builders. 25+ years’ expertise. Book your free site visit today!" />
+  <title>About Us - Samreen Real Estate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Removed Font Awesome CDN since no icons are used -->
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Lato', sans-serif;
+      background: linear-gradient(135deg, #E5E5E5, #F5F5F7);
+      color: #222222;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    /* Navbar */
+    .navbar {
+      display: flex;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: transparent;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+    .navbar.scrolled {
+      background: rgba(20, 54, 66, 0.95);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      margin-right: 25px;
+      /* Removed min-width to prevent overflow */
+    }
+    .logo img {
+      height: 110px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+      user-select: none;
+      transition: height 0.3s ease;
+    }
+    @media (max-width: 768px) {
+      .logo img {
+        height: 80px;
+      }
+    }
+    @media (max-width: 480px) {
+      .logo img {
+        height: 60px; /* Further reduce logo size for small screens */
+      }
+    }
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin-left: auto;
+    }
+    .nav-menu li a {
+      text-decoration: none;
+      color: #E5E5E5;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      position: relative;
+      padding: 0.25rem 0;
+      transition: color 0.3s ease;
+    }
+    .nav-menu li a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: #F9AA33;
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    .nav-menu li a:hover::after,
+    .nav-menu li a.active::after {
+      width: 100%;
+    }
+    .nav-menu li a:hover,
+    .nav-menu li a.active {
+      color: #F9AA33;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      margin-left: auto;
+      padding-left: 1rem;
+      z-index: 11000;
+      user-select: none;
+    }
+    .bar {
+      width: 30px;
+      height: 4px;
+      background: #F5F5F7;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+    .hamburger.active .bar:nth-child(1) {
+      transform: translateY(10px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(3) {
+      transform: translateY(-10px) rotate(-45deg);
+    }
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: 1rem;
+        background: rgba(20, 54, 66, 0.95);
+        flex-direction: column;
+        width: 250px;
+        display: none;
+        padding: 1.5rem;
+        gap: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+        transition: opacity 0.3s ease;
+        z-index: 9998;
+      }
+      .nav-menu.active {
+        display: flex;
+        opacity: 1;
+      }
+      .nav-menu li a {
+        font-size: 1.2rem;
+      }
+    }
+    /* Content container padding to offset fixed navbar */
+    .container {
+      padding: 100px 20px 40px 20px; /* Reduced padding-top for consistency */
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      color: #143642;
+      margin-bottom: 1rem;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    h2.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    p.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Added animation styles for list items */
+    .why-choose-us li, .how-we-work li {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .why-choose-us li.visible, .how-we-work li.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .about-block, .featured-services, .why-choose-us, .how-we-work, .leadership-team {
+      background-color: #E5E5E5;
+      padding: 2rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    .featured-services, .why-choose-us, .how-we-work, .leadership-team {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      text-align: center;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+      justify-content: center;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+    .featured-services {
+      margin-bottom: 3rem;
+    }
+    .why-choose-us {
+      margin-bottom: 3rem;
+    }
+    .how-we-work {
+      margin-bottom: 3rem;
+    }
+    .why-choose-us ul, .how-we-work ul {
+      max-width: 600px;
+      margin: 0 auto;
+      padding-left: 0;
+      text-align: left;
+    }
+    .service-item {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .service-item:hover {
+      transform: translateY(-5px);
+    }
+    .service-item h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      color: #143642;
+      margin-bottom: 0.5rem;
+    }
+    .why-choose-us {
+      background-color: #22A699;
+      color: #E5E5E5;
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #F9AA33;
+      color: #143642;
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 12px rgba(249,170,51,0.3);
+      cursor: pointer;
+      user-select: none;
+      margin-top: 1rem;
+    }
+    .cta-button:hover {
+      background-color: #22A699;
+      color: #E5E5E5;
+      transform: translateY(-3px);
+    }
+    /* Leadership Team Styles */
+    .leadership-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .team-member {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .team-member:hover {
+      transform: translateY(-5px);
+    }
+    .team-member img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+    .team-member h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      color: #143642;
+      margin-bottom: 0.5rem;
+    }
+    .team-member p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+    /* Footer */
+    footer {
+      background-color: #143642;
+      color: #E5E5E5;
+      text-align: center;
+      padding: 1.5rem; /* Increased padding for better appearance */
+      margin-top: 0; /* Removed margin-top to avoid unnecessary spacing */
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      user-select: none;
+    }
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 1.6rem;
+      }
+      .nav-menu li a {
+        font-size: 1.2rem;
+      }
+      .logo img {
+        height: 80px;
+      }
+      .container {
+        padding-top: 80px; /* Adjusted for smaller navbar height */
+      }
+      .team-member img {
+        width: 120px;
+        height: 120px;
+      }
+    }
+    /* Removed unused media query for 1800px */
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/home" class="logo">
+      <img src="SAMREEN MSB Logo - Finalll PDF (1) copy.png" alt="Samreen Real Estate & Builders Logo - Thiruvannamalai Property Experts" />
+    </a>
+    <ul class="nav-menu">
+      <li><a href="/home">Home</a></li>
+      <li><a href="/about" class="active">About Us</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/contact">Contact Us</a></li>
+    </ul>
+    <button type="button" class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </nav>
+
+  <main class="container">
+    <section class="about-block">
+      <h2>About Samreen Real Estate</h2>
+      <p>With over 25 years in Thiruvannamalai’s real estate market, Samreen Real Estate & Builders has helped hundreds of families and investors secure prime plots and build dream homes. Our unmatched local expertise covers both land and residential buildings—guided by trust, transparency, and an eye for long-term value.</p>
+    </section>
+
+    <section class="featured-services">
+      <h2>Featured Services</h2>
+      <div class="services-grid">
+        <div class="service-item">
+          <h3>Plots for Sale</h3>
+          <p>Discover DTCP & RERA-approved plots in the city’s most promising areas—perfect for living or investment.</p>
+        </div>
+        <div class="service-item">
+          <h3>Building Construction</h3>
+          <p>Turnkey and customised home building solutions with extensive local experience.</p>
+        </div>
+        <div class="service-item">
+          <h3>Investment Guidance</h3>
+          <p>Get expert advice on land appreciation and resale opportunities.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="leadership-team">
+      <h2>Our Leadership Team</h2>
+      <div class="leadership-grid">
+        <div class="team-member">
+          <img src="managing director.jpeg" alt="B. Mohammed Iliyas" />
+          <h3>B. Mohammed Iliyas</h3>
+          <p>Managing Director with over two decades of leadership, driving Samreen’s vision with strategic expertise.</p>
+        </div>
+        <div class="team-member">
+          <img src="yuvaraj.jpeg" alt="G. Yuvaraj" />
+          <h3>G. Yuvaraj</h3>
+          <p>Manager with a keen focus on operational excellence and client satisfaction.</p>
+        </div>
+        <div class="team-member">
+          <img src="abbas.jpeg" alt="B. Abbas" />
+          <h3>B. Abbas</h3>
+          <p>Director bringing extensive industry knowledge and innovative solutions to the team.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-choose-us">
+      <h2>Why Choose Us?</h2>
+      <ul>
+        <li>Trusted by hundreds of customers</li>
+        <li>Highly transparent process</li>
+        <li>Comprehensive legal and on-site documentation support</li>
+        <li>Free consultation and site visit</li>
+      </ul>
+      <a href="#contact" class="cta-button">Get in Touch</a>
+    </section>
+
+    <section class="how-we-work">
+      <h2>How We Work</h2>
+      <ul>
+        <li>Listen to your requirements</li>
+        <li>Show you the best available plots/buildings</li>
+        <li>Arrange free site visits and detailed walkthroughs</li>
+        <li>Assist with documentation and legalities</li>
+        <li>Handover with complete satisfaction</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Samreen Real Estate. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.querySelector('.hamburger');
+      const menu = document.querySelector('.nav-menu');
+      const navbar = document.querySelector('.navbar');
+
+      if (hamburger && menu && navbar) {
+        // Click event for hamburger
+        hamburger.addEventListener('click', () => {
+          const isActive = hamburger.classList.toggle('active');
+          menu.classList.toggle('active');
+          hamburger.setAttribute('aria-expanded', isActive);
+        });
+
+        // Keyboard accessibility for hamburger
+        hamburger.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const isActive = hamburger.classList.toggle('active');
+            menu.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', isActive);
+          }
+        });
+
+        // Close menu when clicking a link
+        menu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            menu.classList.remove('active');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!navbar.contains(e.target)) {
+            menu.classList.remove('active');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Scroll behavior for navbar
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+          }
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.3 });
+
+        // Observe elements for animations
+        document.querySelectorAll('h2, p, .why-choose-us li, .how-we-work li, .team-member').forEach(el => {
+          if (el) observer.observe(el);
+        });
+      } else {
+        console.warn('Required DOM elements (.hamburger, .nav-menu, or .navbar) not found.');
+      }
+    });
+  </script>
+</body>
+</html>
