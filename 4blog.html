@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog | Samreen Real Estate & Builders</title>
+  <meta name="description" content="Get expert blog updates on property trends, plot values, and real estate tips for Thiruvannamalai. Samreen Real Estate & Builders – Your knowledge hub." />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #143642;
+      --secondary: #F9AA33;
+      --accent: #E5E5E5;
+      --accent2: #F5F5F7;
+      --text: #222222;
+      --success: #22A699;
+      --font-primary: 'Montserrat', sans-serif;
+      --font-secondary: 'Lato', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-secondary);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV BAR */
+    nav.navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: transparent;
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      z-index: 1100;
+      transition: background-color 0.3s ease;
+    }
+    nav.navbar.scrolled {
+      background: rgba(var(--primary), 0.9);
+    }
+    .logo img {
+      height: 110px;
+      width: auto;
+      object-fit: contain;
+      user-select: none;
+    }
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-left: auto;
+    }
+    .nav-menu li a {
+      color: #E5E5E5;
+      padding: 0.4rem 0.6rem;
+      border-radius: 5px;
+      transition: color 0.3s ease;
+      display: block;
+    }
+    .nav-menu li a.active, .nav-menu li a:hover, .nav-menu li a:focus {
+      color: var(--secondary);
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      margin-left: auto;
+      z-index: 1200;
+      padding: 0;
+    }
+    .bar {
+      width: 30px;
+      height: 4px;
+      border-radius: 2px;
+      background: #F5F5F7;
+      transition: all 0.3s ease;
+    }
+    .hamburger.active .bar:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+    .hamburger.active .bar:nth-child(2) { opacity: 0; }
+    .hamburger.active .bar:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+    @media (max-width: 768px) {
+      .logo img { height: 80px; }
+      .nav-menu {
+        position: fixed;
+        top: 80px;
+        right: 1rem;
+        background: rgba(var(--primary), 0.95);
+        flex-direction: column;
+        align-items: flex-start;
+        width: 250px;
+        max-width: 75vw;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1011;
+      }
+      .nav-menu.active {
+        display: flex;
+        opacity: 1;
+      }
+      .nav-menu li a {
+        font-size: 1.2rem;
+        padding: 0.75rem;
+      }
+      .hamburger { display: flex; }
+      nav.navbar { padding: 0.7rem 1rem; }
+    }
+    @media (max-width: 480px) {
+      .logo img { height: 60px; }
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-top: 115px;
+      width: 96%;
+      flex: 1;
+    }
+    /* HERO / HEADER SECTION */
+    section.hero {
+      background: var(--primary);
+      color: var(--accent);
+      border-radius: 16px;
+      padding: 3.8rem 2.5rem 2.5rem 2.5rem;
+      box-shadow: 0 4px 12px rgba(20, 54, 66, 0.20);
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    .hero .overlay {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-family: var(--font-primary);
+      font-size: clamp(1.9rem, 5vw, 2.7rem);
+      margin-bottom: 1rem;
+      font-weight: 700;
+      line-height: 1.18;
+    }
+    .hero p {
+      font-size: 1.18rem;
+      font-family: var(--font-secondary);
+      margin-bottom: 2.1rem;
+      color: var(--secondary);
+      font-weight: 600;
+    }
+    .cta {
+      background: var(--success);
+      color: var(--primary);
+      padding: 0.78rem 1.9rem;
+      border: none;
+      border-radius: 24px;
+      font-family: var(--font-primary);
+      font-size: 1.13rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background .2s, box-shadow .2s;
+      box-shadow: 0 4px 10px rgba(34,166,153,0.17);
+    }
+    .cta:hover { background: var(--secondary); color: var(--primary); }
+
+    /* CARD GRID */
+    #latest-posts {
+      margin-top: 2.5rem;
+      opacity: 0;
+      transform: translateY(100vh); /* Start from below the viewport */
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    #latest-posts.animate-from-bottom .cards,
+    #latest-posts.animate-from-bottom h2 {
+      opacity: 0;
+      transform: translateY(50px); /* Start slightly below final position */
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    #latest-posts.visible {
+      opacity: 1;
+      transform: translateY(0); /* Move to centered position */
+    }
+    #latest-posts.visible .cards,
+    #latest-posts.visible h2 {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #latest-posts.visible .card {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    #latest-posts.visible .card:nth-child(1) {
+      transition-delay: 0.2s;
+    }
+    #latest-posts.visible .card:nth-child(2) {
+      transition-delay: 0.4s;
+    }
+    #latest-posts.visible .card:nth-child(3) {
+      transition-delay: 0.6s;
+    }
+    #latest-posts.visible .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 2.1rem;
+      margin-bottom: 3rem;
+    }
+    .card {
+      background: #fff;
+      padding: 1.4rem 1.2rem 1.7rem 1.2rem;
+      border-radius: 13px;
+      box-shadow: 0 2px 12px rgba(20,54,66,0.08);
+      color: var(--primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: var(--font-primary);
+      font-weight: 500;
+      transition: box-shadow 0.2s, transform 0.2s;
+      min-height: 340px;
+      text-align: center;
+      position: relative;
+    }
+    .card img {
+      width: 100%;
+      max-width: 235px;
+      height: 125px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 2px 5px rgba(34,166,153,0.10);
+      background: var(--accent2);
+    }
+    .card h3 {
+      font-size: 1.18rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: var(--primary);
+    }
+    .card p {
+      font-size: 1.04rem;
+      color: var(--text);
+    }
+
+    /* MONTHLY CONTENT / HIGHLIGHTS */
+    .monthly-section {
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      transform: translateY(-100vh); /* Start from above the viewport */
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .monthly-section.animate-from-top h2,
+    .monthly-section.animate-from-top .highlights {
+      opacity: 0;
+      transform: translateY(-50px); /* Start slightly above final position */
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .monthly-section.visible {
+      opacity: 1;
+      transform: translateY(0); /* Move to centered position */
+    }
+    .monthly-section.visible h2,
+    .monthly-section.visible .highlights {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .monthly-section.visible .highlight {
+      opacity: 0;
+      transform: translateY(-50px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .monthly-section.visible .highlight:nth-child(1) {
+      transition-delay: 0.2s;
+    }
+    .monthly-section.visible .highlight:nth-child(2) {
+      transition-delay: 0.4s;
+    }
+    .monthly-section.visible .highlight:nth-child(3) {
+      transition-delay: 0.6s;
+    }
+    .monthly-section.visible .highlight.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .monthly-section h2 {
+      font-family: var(--font-primary);
+      font-size: 1.35rem;
+      color: var(--primary);
+      margin-bottom: 1.7rem;
+      text-align: center;
+      font-weight: 700;
+    }
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .highlight {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(20,54,66,0.07);
+      padding: 1.5rem 1.1rem 1.5rem 1.1rem;
+      color: var(--primary);
+      min-height: 315px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .highlight img {
+      width: 100%;
+      max-width: 200px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 7px;
+      margin-bottom: 1rem;
+      background: var(--accent2);
+    }
+    .highlight h3 { font-size: 1.07rem; font-weight: 700; }
+    .highlight p {
+      font-size: 1.03rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+    /* CTA BOTTOM */
+    .explore-cta {
+      text-align: center;
+      padding: 3rem 0 1rem 0;
+    }
+    .explore-cta h2 {
+      font-family: var(--font-primary);
+      color: var(--primary);
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .cta-btn {
+      background: var(--secondary);
+      color: var(--primary);
+      border: none;
+      border-radius: 24px;
+      padding: 0.9rem 2.3rem;
+      font-size: 1.10rem;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+      box-shadow: 0 4px 11px rgba(249,170,51,0.09);
+    }
+    .cta-btn:hover { background: var(--success); color: #fff; }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: var(--secondary);
+      text-align: center;
+      padding: 1.6rem 1rem;
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.2px;
+      user-select: none;
+      border-radius: 16px 16px 0 0;
+    }
+
+    @media (max-width: 600px) {
+      main { padding-top: 80px; width: 99%; }
+      section.hero { padding: 2rem 0.5rem 1.7rem 0.5rem; }
+      .cards, .highlights { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV BAR -->
+  <nav class="navbar" role="navigation" aria-label="Primary Navigation">
+    <a href="home.html" class="logo" aria-label="Samreen Real Estate Home">
+      <img src="SAMREEN MSB Logo - Finalll PDF (1) copy.png" alt="Samreen Real Estate & Builders Logo" loading="lazy" />
+    </a>
+    <ul class="nav-menu" role="menubar" id="primary-menu">
+      <li role="none"><a role="menuitem" href="1page.html">Home</a></li>
+      <li role="none"><a role="menuitem" href="2abt.html">About Us</a></li>
+      <li role="none"><a role="menuitem" href="3services.html">Services</a></li>
+      <li role="none"><a role="menuitem" href="4blog.html" class="active">Blog</a></li>
+      <li role="none"><a role="menuitem" href="5contact.html">Contact</a></li>
+    </ul>
+    <button type="button" class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </nav>
+  <br>
+  <br>
+  <main>
+    <!-- HERO / INTRO -->
+    <section class="hero">
+      <div class="overlay">
+        <h1 id="heroTitle">Are you a first time buyer?</h1>
+        <p>Welcome to our knowledge hub! Whether you’re a first-time buyer or a seasoned investor, get monthly updates on plot values, market trends, and insider tips about Thiruvannamalai’s ever-evolving property landscape.</p>
+        <button class="cta" onclick="window.location.href='#latest-posts'" tabindex="0">Explore Now</button>
+      </div>
+    </section>
+    <!-- BLOG POSTS -->
+    <section id="latest-posts" class="animate-from-bottom">
+      <h2>Latest Posts</h2>
+      <div class="cards">
+        <div class="card">
+          <img src="thiruvannamalailandscape.jpeg" alt="Thiruvannamalai real estate landscape" loading="lazy" />
+          <h3>Why Thiruvannamalai is the Next Real Estate Hotspot</h3>
+          <p>Discover why Thiruvannamalai is gaining traction in the real estate market.</p>
+          <p>Learn about the cultural, spiritual, and economic factors driving property demand in this vibrant town.</p>
+        </div>
+        <div class="card">
+          <img src="plotvalue.jpeg" alt="Plot value trends 2025" loading="lazy" />
+          <h3>2025 Plot Value Trends—Best Time to Invest in Land</h3>
+          <p>Insights into the upcoming plot value trends for 2025.</p>
+          <p>Explore market predictions and investment opportunities for land buyers in Thiruvannamalai.</p>
+        </div>
+        <div class="card">
+          <img src="checklist.jpeg" alt="Checklist for buying plots" loading="lazy" />
+          <h3>Checklist: What to Look for When Buying a Plot in Thiruvannamalai</h3>
+          <p>Essential tips to ensure you make the right property choice.</p>
+          <p>A step-by-step guide to evaluating plots for location, approvals, and future growth potential.</p>
+        </div>
+      </div>
+    </section>
+    <!-- MONTHLY CONTENT / HIGHLIGHTS -->
+    <section class="monthly-section animate-from-top">
+      <h2>Monthly Content about Plots in Thiruvannamalai</h2>
+      <div class="highlights">
+        <div class="highlight">
+          <img src="gatedcommunity.jpeg" alt="Gated community benefits" loading="lazy" />
+          <h3>Gated Communities: Value and Security</h3>
+          <p>Explore the benefits of investing in gated communities.</p>
+          <p>Understand how gated communities offer enhanced security and lifestyle advantages for buyers.</p>
+        </div>
+        <div class="highlight">
+          <img src="dtcpapproved.jpeg" alt="DTCP and RERA approvals" loading="lazy" />
+          <h3>Understanding DTCP &amp; RERA Approvals for Land Buyers</h3>
+          <p>Learn about the importance of approvals for secure land purchases.</p>
+          <p>A detailed overview of DTCP and RERA regulations to protect your investment.</p>
+        </div>
+        <div class="highlight">
+          <img src="cutomerservice.jpeg" alt="Customer support headset" loading="lazy" />
+          <h3>Post-Sale Assistance</h3>
+          <p>Ongoing support to guide maintenance and other concerns after purchase.</p>
+        </div>
+      </div>
+    </section>
+    <div class="explore-cta">
+      <h2>Ready to Explore More Insights?</h2>
+      <a href="contact.html"><button class="cta-btn" type="button">Contact Us Now</button></a>
+    </div>
+  </main>
+  <footer role="contentinfo">
+    <p>© 2025 Samreen Real Estate. All rights reserved.</p>
+  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.querySelector('.hamburger');
+      const menu = document.querySelector('.nav-menu');
+      const navbar = document.querySelector('nav.navbar');
+
+      hamburger.addEventListener('click', () => {
+        const isActive = hamburger.classList.toggle('active');
+        menu.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isActive);
+      });
+
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menu.classList.remove('active');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+          menu.classList.remove('active');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Navbar background change on scroll
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // Animate #latest-posts (bottom-to-center)
+      const latestPosts = document.querySelector('#latest-posts');
+      if ('IntersectionObserver' in window) {
+        const observerLatest = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              const cards = entry.target.querySelectorAll('.card');
+              cards.forEach((card, index) => {
+                setTimeout(() => {
+                  card.classList.add('visible');
+                }, index * 200); // 200ms delay between each card
+              });
+              observerLatest.unobserve(entry.target); // Animate once
+            }
+          });
+        }, { threshold: 0.3 });
+        observerLatest.observe(latestPosts);
+      } else {
+        latestPosts.classList.add('visible');
+        const cards = latestPosts.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            card.classList.add('visible');
+          }, index * 200);
+        });
+      }
+
+      // Animate .monthly-section (top-to-center)
+      const monthlySection = document.querySelector('.monthly-section');
+      if ('IntersectionObserver' in window) {
+        const observerMonthly = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              const highlights = entry.target.querySelectorAll('.highlight');
+              highlights.forEach((highlight, index) => {
+                setTimeout(() => {
+                  highlight.classList.add('visible');
+                }, index * 200); // 200ms delay between each highlight
+              });
+              observerMonthly.unobserve(entry.target); // Animate once
+            }
+          });
+        }, { threshold: 0.3 });
+        observerMonthly.observe(monthlySection);
+      } else {
+        monthlySection.classList.add('visible');
+        const highlights = monthlySection.querySelectorAll('.highlight');
+        highlights.forEach((highlight, index) => {
+          setTimeout(() => {
+            highlight.classList.add('visible');
+          }, index * 200);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

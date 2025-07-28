@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plots & Buildings for Sale in Thiruvannamalai | Samreen Real Estate & Builders</title>
+  <meta name="description" content="Discover premium plots and quality homes in Thiruvannamalai with Samreen Real Estate & Builders. 25+ years’ expertise. Book your free site visit today!" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #143642;
+      --secondary: #F9AA33;
+      --accent: #E5E5E5;
+      --accent2: #F5F5F7;
+      --text: #222222;
+      --success: #22A699;
+      --font-primary: 'Montserrat', sans-serif;
+      --font-secondary: 'Lato', sans-serif;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: var(--font-secondary);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    /* Navigation Bar */
+    nav.navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: transparent;
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+    }
+    nav.navbar.scrolled {
+      background: rgba(var(--primary), 0.9);
+    }
+    .logo img {
+      height: 110px;
+      width: auto;
+      object-fit: contain;
+      user-select: none;
+    }
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-left: auto;
+    }
+    .nav-menu li a {
+      color: #E5E5E5;
+      padding: 0.4rem 0.6rem;
+      border-radius: 5px;
+      transition: color 0.3s ease;
+      display: block;
+    }
+    .nav-menu li a:hover,
+    .nav-menu li a:focus,
+    .nav-menu li a.active {
+      color: var(--secondary);
+    }
+    button.hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      margin-left: auto;
+      padding-left: 1rem;
+      user-select: none;
+      z-index: 1200;
+    }
+    button.hamburger .bar {
+      height: 4px;
+      width: 30px;
+      border-radius: 2px;
+      background-color: #F5F5F7;
+      transition: all 0.3s ease;
+    }
+    button.hamburger.active .bar:nth-child(1) {
+      transform: translateY(10px) rotate(45deg);
+    }
+    button.hamburger.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    button.hamburger.active .bar:nth-child(3) {
+      transform: translateY(-10px) rotate(-45deg);
+    }
+    
+    @media (max-width: 768px) {
+      .logo img {
+        height: 80px;
+      }
+      .nav-menu {
+        position: fixed;
+        top: 80px;
+        right: 1rem;
+        background: rgba(var(--primary), 0.95);
+        flex-direction: column;
+        width: 250px;
+        max-width: 80vw;
+        padding: 1.5rem;
+        gap: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1100;
+      }
+      .nav-menu.active {
+        display: flex;
+        opacity: 1;
+      }
+      .nav-menu li a {
+        font-size: 1.2rem;
+        padding: 0.75rem;
+      }
+      button.hamburger {
+        display: flex;
+      }
+      nav.navbar {
+        padding: 0.75rem 1.5rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .logo img {
+        height: 60px;
+      }
+    }
+
+    /* Hero Section with Background Video - Adjusted for centered content */
+    section.hero {
+      position: relative;
+      height: 95vh;
+      min-height: 500px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 1rem;
+      color: #E5E5E5;
+      z-index: 0;
+    }
+    .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      z-index: -2;
+      pointer-events: none;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: transparent;
+      z-index: -1;
+    }
+    section.hero h1,
+    section.hero p,
+    section.hero .btn-cta,
+    section.hero .trust-signals {
+      position: relative;
+      z-index: 1;
+    }
+    section.hero h1 {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: clamp(1.75rem, 5vw, 3.5rem);
+      margin-bottom: 1rem;
+      max-width: 900px;
+      line-height: 1.2;
+    }
+    section.hero p {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      margin-bottom: 2.5rem;
+      color: var(--secondary);
+      font-weight: 600;
+    }
+    .btn-cta {
+      padding: 0.9rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      background-color: var(--success);
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(34, 166, 153, 0.5);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      margin-bottom: 1rem;
+    }
+    .btn-cta:hover,
+    .btn-cta:focus {
+      background-color: #1B7B6F;
+      box-shadow: 0 6px 15px rgba(27, 123, 111, 0.75);
+      outline: none;
+    }
+    .trust-signals {
+      margin-top: 2rem;
+      color: var(--accent);
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* Services Snapshot with Transition */
+    section#services {
+      background-color: #fff;
+      color: var(--primary);
+      padding: 3rem 1rem 4rem 1rem;
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    section#services.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    section#services h2 {
+      font-family: var(--font-primary);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .services-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .service-card {
+      background-color: whitesmoke;
+      color: var(--primary);
+      padding: 2.5rem 2rem;
+      border-radius: 12px;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-align: center;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+    .service-card:hover, .service-card:focus {
+      transform: scale(1.05);
+      outline: none;
+    }
+
+    /* Key Highlights with Transition */
+    section#highlights {
+      background-color: var(--accent);
+      padding: 4rem 1rem;
+      text-align: center;
+      color: var(--primary);
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    section#highlights.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    section#highlights h2 {
+      font-family: var(--font-primary);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+    .highlights-container {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .highlight-item {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      flex: 1 1 200px;
+      max-width: 280px;
+      padding: 2rem 1.5rem;
+    }
+    .highlight-item h3 {
+      font-family: var(--font-primary);
+      font-size: 3rem;
+      color: var(--success);
+      margin-bottom: 0.5rem;
+    }
+    .highlight-item p {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    /* How We Work with Transition */
+    section#how {
+      background-color: #fff;
+      color: var(--primary);
+      padding: 4rem 1rem;
+      text-align: center;
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    section#how.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    section#how h2 {
+      font-family: var(--font-primary);
+      font-size: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .steps-container {
+      display: flex;
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .step {
+      background-color: var(--accent2);
+      padding: 2rem 1.5rem;
+      border-radius: 15px;
+      flex: 1 1 200px;
+      max-width: 240px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+      font-family: var(--font-primary);
+      font-weight: 600;
+      cursor: default;
+      transition: background-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .step span {
+      background-color: var(--success);
+      color: var(--accent);
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      user-select: none;
+    }
+    .step p {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    /* Testimonials with Transition */
+    section#testimonials {
+      background-color: var(--accent);
+      padding: 3rem 1rem 5rem 1rem;
+      text-align: center;
+      color: var(--primary);
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    section#testimonials.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    section#testimonials h2 {
+      font-family: var(--font-primary);
+      font-size: 2rem;
+      margin-bottom: 3rem;
+    }
+    .testimonials-container {
+      display: flex;
+      gap: 1.8rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .testimonial {
+      background-color: #fff;
+      padding: 1.8rem 1.5rem;
+      border-radius: 15px;
+      flex: 1 1 280px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--primary);
+      position: relative;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .testimonial::before {
+      content: open-quote;
+      font-size: 2.5rem;
+      position: absolute;
+      top: 5px;
+      left: 10px;
+      color: var(--success);
+      font-family: serif;
+    }
+    .testimonial::after {
+      content: close-quote;
+      font-size: 2.5rem;
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      color: var(--success);
+      font-family: serif;
+    }
+
+    /* Visual CTA with Transition */
+    section#visual-cta {
+      background-color: var(--success);
+      padding: 3rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto 3rem auto;
+      text-align: center;
+      color: var(--accent);
+      border-radius: 12px;
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    section#visual-cta.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    section#visual-cta h2 {
+      font-family: var(--font-primary);
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    .cta-visual {
+      padding: 0.85rem 2.5rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      background: var(--accent);
+      color: var(--primary);
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .cta-visual:hover {
+      background: var(--secondary);
+      color: var(--primary);
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: var(--secondary);
+      text-align: center;
+      padding: 1.6rem 1rem;
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.2px;
+      user-select: none;
+      margin-top: 2rem;
+      border-radius: 16px 16px 0 0;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1000px) {
+      .highlights-container, .steps-container, .testimonials-container, .trust-signals {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.8rem;
+      }
+      section.hero h1 {
+        font-size: 2rem;
+        max-width: 90%;
+      }
+      section.hero p {
+        font-size: 1.1rem;
+      }
+      .btn-cta {
+        width: 100%;
+        max-width: 300px;
+        font-size: 1.05rem;
+      }
+    }
+    @media (max-width: 600px) {
+      nav.navbar {
+        padding: 0.9rem 1.5rem;
+      }
+      .nav-menu {
+        font-size: 1rem;
+      }
+      section.hero {
+        height: 80vh;
+      }
+      section.hero h1 {
+        font-size: 1.7rem;
+      }
+      section.hero p {
+        font-size: 1rem;
+      }
+      section#visual-cta h2 {
+        font-size: 1.6rem;
+      }
+      .trust-signals {
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="Primary Navigation">
+    <a href="/" class="logo" aria-label="Samreen Real Estate and Builders Home">
+      <img src="SAMREEN MSB Logo - Finalll PDF (1) copy.png" alt="Samreen Real Estate & Builders Logo - Thiruvannamalai Property Experts" loading="lazy"/>
+    </a>
+    <ul class="nav-menu" role="menubar" id="primary-menu">
+      <li role="none"><a role="menuitem" href="1page.html" class="active">Home</a></li>
+      <li role="none"><a role="menuitem" href="2abt.html">About Us</a></li>
+      <li role="none"><a role="menuitem" href="3services.html">Services</a></li>
+      <li role="none"><a role="menuitem" href="4blog.html">Blog</a></li>
+      <li role="none"><a role="menuitem" href="5contact.html">Contact Us</a></li>
+    </ul>
+    <button type="button" class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </nav>
+
+  <section class="hero" role="banner" aria-label="Hero Banner">
+    <video autoplay muted loop playsinline class="hero-video" aria-hidden="true" tabindex="-1">
+      <source src="bgvideo.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero-overlay">
+      <div class="hero-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 95vh; text-align: center;">
+        <h1>One Stop for Your Dream Property in Thiruvannamalai</h1>
+        <p>Trusted for 25+ years. Your dream home is our goal.</p>
+        <button class="btn-cta" type="button" aria-label="Book a Free Site Visit">Book a Free Site Visit</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" aria-label="Snapshot of services">
+    <h2>Our Services</h2>
+    <div class="services-cards" role="list">
+      <div class="service-card" role="listitem" tabindex="0" aria-label="Plots for sale service">Plots</div>
+      <div class="service-card" role="listitem" tabindex="0" aria-label="Buildings for sale service">Buildings</div>
+    </div>
+  </section>
+
+  <section id="highlights" aria-label="Key Highlights">
+    <h2>Why Choose Us</h2>
+    <div class="highlights-container">
+      <div class="highlight-item" tabindex="0">
+        <h3 id="years">0+</h3>
+        <p>Years of Experience</p>
+      </div>
+      <div class="highlight-item" tabindex="0">
+        <h3 id="sites">0+</h3>
+        <p>Sites Delivered</p>
+      </div>
+      <div class="highlight-item" tabindex="0">
+        <h3 id="clients">0+</h3>
+        <p>Happy Clients</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" aria-label="How we work section">
+    <h2>Buying Made Easy</h2>
+    <div class="steps-container">
+      <div class="step" tabindex="0" aria-label="Step 1: Choose Property">
+        <span>1</span>
+        <p>Choose Property</p>
+      </div>
+      <div class="step" tabindex="0" aria-label="Step 2: Site Visit">
+        <span>2</span>
+        <p>Site Visit</p>
+      </div>
+      <div class="step" tabindex="0" aria-label="Step 3: Finalize and Move In">
+        <span>3</span>
+        <p>Finalize & Move In</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" aria-label="Testimonials">
+    <h2>What Our Clients Say</h2>
+    <div class="testimonials-container">
+      <blockquote class="testimonial" tabindex="0" aria-label="Client testimonial Jane">
+        “The team made buying our plot seamless and secure. Highly recommend!”
+      </blockquote>
+      <blockquote class="testimonial" tabindex="0" aria-label="Client testimonial anonymous John">
+        “Professional, honest, and always available. Thank you for helping us invest confidently in Thiruvannamalai!”
+      </blockquote>
+    </div>
+  </section>
+
+  <section id="visual-cta" aria-label="Call to Action">
+    <h2>Book Your Free Site Visit Today!</h2>
+    <button class="cta-visual" type="button" aria-label="Book your free site visit">Book a Visit</button>
+    <p style="margin-top:1rem; font-weight:700; font-size:1rem;">
+      Or call us on <a href="tel:+919876543210" aria-label="Call Samreen Real Estate">+91 98765 43210</a> for an instant consultation.
+    </p>
+  </section>
+
+  <footer role="contentinfo">
+    <p>© 2025 Samreen Real Estate. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.querySelector('.hamburger');
+      const menu = document.querySelector('.nav-menu');
+      const navbar = document.querySelector('nav.navbar');
+
+      hamburger.addEventListener('click', () => {
+        const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+        hamburger.setAttribute('aria-expanded', !expanded);
+        hamburger.classList.toggle('active');
+        menu.classList.toggle('active');
+      });
+
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+          menu.classList.remove('active');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+          menu.classList.remove('active');
+        }
+      });
+
+      // Navbar background change on scroll
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // Animate counters in Highlights
+      function animateValue(id, start, end, duration) {
+        let startTimestamp = null;
+        const element = document.getElementById(id);
+        if (!element) return;
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          element.textContent = Math.floor(progress * (end - start) + start) + '+';
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          }
+        };
+        window.requestAnimationFrame(step);
+      }
+      const highlightsSection = document.getElementById('highlights');
+      let animated = false;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !animated) {
+            animateValue('years', 0, 25, 2000);
+            animateValue('sites', 0, 500, 2000);
+            animateValue('clients', 0, 1000, 2000);
+            animated = true;
+          }
+        });
+      }, { threshold: 0.5 });
+      if (highlightsSection) observer.observe(highlightsSection);
+
+      // Scroll-triggered animation for sections
+      const sections = document.querySelectorAll('section[id]');
+      const sectionObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); // Animate once
+          }
+        });
+      }, { threshold: 0.1 });
+
+      sections.forEach(section => {
+        sectionObserver.observe(section);
+      });
+    });
+  </script>
+</body>
+</html>

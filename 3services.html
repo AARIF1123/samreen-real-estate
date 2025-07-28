@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Services | Samreen Real Estate & Builders</title>
+  <meta name="description" content="Explore our real estate services in Thiruvannamalai: Plots for Sale, Building Construction, Site Visit Consulting, and Investment Advisory. 25+ years of expertise." />
+  <!-- Google Fonts with fallback -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome CDN with fallback -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style> .fas { font-family: Arial, sans-serif; } </style>
+
+  <style>
+    /* Reset */
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+    body {
+      font-family: 'Lato', Arial, sans-serif;
+      background: linear-gradient(135deg, #E5E5E5, #F5F5F7);
+      color: #222;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* VARIABLES */
+    :root {
+      --primary: #143642;
+      --secondary: #F9AA33;
+      --accent-light: #E5E5E5;
+      --accent-lighter: #F5F5F7;
+      --success: #22A699;
+      --text-primary: #222222;
+      --font-primary: 'Montserrat', Arial, sans-serif;
+      --font-secondary: 'Lato', Arial, sans-serif;
+    }
+
+    /* NAVBAR */
+    nav.navbar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: transparent;
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+    }
+    nav.navbar.scrolled {
+      background: rgba(var(--primary), 0.9);
+    }
+    .logo img {
+      height: 110px;
+      width: auto;
+      object-fit: contain;
+      user-select: none;
+    }
+    ul.nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin-left: auto;
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    ul.nav-menu li a {
+      color: #E5E5E5;
+      padding: 0.4rem 0.6rem;
+      border-radius: 5px;
+      transition: color 0.3s ease;
+      display: block;
+    }
+    ul.nav-menu li a:hover,
+    ul.nav-menu li a.active {
+      color: var(--secondary);
+    }
+    button.hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      margin-left: auto;
+      padding-left: 1rem;
+      user-select: none;
+      z-index: 1200;
+    }
+    button.hamburger .bar {
+      height: 4px;
+      width: 30px;
+      border-radius: 2px;
+      background-color: #F5F5F7;
+      transition: all 0.3s ease;
+    }
+    button.hamburger.active .bar:nth-child(1) {
+      transform: translateY(10px) rotate(45deg);
+    }
+    button.hamburger.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    button.hamburger.active .bar:nth-child(3) {
+      transform: translateY(-10px) rotate(-45deg);
+    }
+
+    /* Responsive Navbar */
+    @media (max-width: 768px) {
+      .logo img { height: 80px; }
+      button.hamburger { display: flex; }
+      ul.nav-menu {
+        position: fixed;
+        top: 80px;
+        right: 1rem;
+        background: rgba(var(--primary), 0.95);
+        flex-direction: column;
+        width: 250px;
+        display: none;
+        padding: 1.5rem;
+        gap: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+        transition: opacity 0.3s ease;
+        z-index: 1100;
+      }
+      ul.nav-menu.active {
+        display: flex;
+        opacity: 1;
+      }
+      ul.nav-menu li a {
+        font-size: 1.2rem;
+        padding: 0.75rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .logo img { height: 60px; }
+    }
+
+    /* HERO SECTION */
+    section.hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 85vh;
+      background: url('wallpaper.jpg') no-repeat center/cover, var(--primary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 80px;
+      overflow: hidden;
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      text-align: center;
+      z-index: 2;
+    }
+    .overlay h1, .overlay p, .overlay button.cta {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .overlay h1.visible, .overlay p.visible, .overlay button.cta.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .overlay h1 {
+      font-family: var(--font-primary);
+      font-size: 1.5rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+    }
+    .overlay p {
+      font-family: var(--font-secondary);
+      font-size: 0.9rem;
+      color: #E5E5E5;
+      margin-bottom: 1.2rem;
+    }
+    button.cta {
+      background-color: var(--secondary);
+      color: var(--primary);
+      border: none;
+      padding: 0.8rem 1.8rem;
+      font-weight: 700;
+      font-family: var(--font-primary);
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.4s, transform 0.3s;
+      user-select: none;
+    }
+    button.cta:hover {
+      background-color: var(--success);
+      color: var(--accent-lighter);
+      transform: scale(1.1);
+    }
+    button.cta:focus-visible {
+      outline: 2px solid var(--success);
+      outline-offset: 2px;
+    }
+
+    /* SERVICES SECTION */
+    section#services {
+      max-width: 1200px;
+      margin: 4rem auto 3rem auto;
+      padding: 0 1rem;
+    }
+    section#services h2 {
+      font-family: var(--font-primary);
+      font-size: 2rem;
+      color: var(--success);
+      margin-bottom: 2rem;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    section#services h2.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .card {
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(var(--success), 0.12);
+      text-align: center;
+      color: var(--primary);
+      cursor: default;
+      user-select: none;
+      opacity: 0;
+      transform: translateX(-100%);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .card.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .card img {
+      max-width: 100px;
+      height: auto;
+      margin-bottom: 1.3rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .card h3 {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .card h3.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .card p {
+      font-family: var(--font-secondary);
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .card p.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .card:hover, .card:focus-within {
+      background-color: #d0eae8;
+      transform: scale(1.05);
+      outline: none;
+    }
+
+    /* HIGHLIGHTS SECTION */
+    section.highlights {
+      max-width: 900px;
+      margin: 0 auto 4rem auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      text-align: center;
+      color: var(--primary);
+    }
+    section.highlights h2 {
+      font-family: var(--font-primary);
+      font-size: 2rem;
+      color: var(--secondary);
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    section.highlights h2.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .highlight-items {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+    .highlight {
+      background: #fff;
+      padding: 1.6rem 1.4rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(var(--primary), 0.1);
+      user-select: none;
+      cursor: default;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .highlight.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .highlight img {
+      max-width: 80px;
+      height: auto;
+      margin-bottom: 0.6rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .highlight h3 {
+      font-family: var(--font-primary);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--success);
+      margin-bottom: 0.6rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .highlight h3.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .highlight p {
+      font-family: var(--font-secondary);
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--text-primary);
+      margin: 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .highlight p.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Animations keyframes */
+    @keyframes slideInFromLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    @keyframes slideInFromRight {
+      0% {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* CALL TO ACTION */
+    section.visual-cta {
+      max-width: 1200px;
+      background: var(--success);
+      padding: 3rem 1rem;
+      border-radius: 14px;
+      text-align: center;
+      color: var(--accent-lighter);
+      font-family: var(--font-primary);
+      margin: 0 auto 4rem auto;
+      box-shadow: 0 6px 18px rgba(var(--success), 0.25);
+      user-select: none;
+    }
+    section.visual-cta h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    section.visual-cta h2.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    button.cta-button {
+      font-size: 1.1rem;
+      font-weight: 600;
+      background-color: var(--secondary);
+      border: none;
+      border-radius: 10px;
+      padding: 0.85rem 2rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      color: var(--primary);
+      font-family: var(--font-primary);
+      user-select: none;
+    }
+    button.cta-button:hover,
+    button.cta-button:focus-visible {
+      background-color: #1e8e7a;
+      color: var(--accent-lighter);
+      outline: none;
+      transform: scale(1.05);
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: var(--primary);
+      color: var(--secondary);
+      text-align: center;
+      padding: 1.6rem 1rem;
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.2px;
+      user-select: none;
+      border-radius: 16px 16px 0 0;
+    }
+
+    /* Responsive Grid */
+    @media (min-width: 700px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .highlight-items {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      section.hero {
+        height: 900px;
+      }
+      .overlay h1 {
+        font-size: 3rem;
+      }
+      .overlay p {
+        font-size: 1.3rem;
+      }
+    }
+    @media (min-width: 992px) {
+      .cards {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 1100px;
+      }
+      section.hero {
+        height: 970px;
+      }
+      .overlay h1 {
+        font-size: 4rem;
+      }
+      .overlay p {
+        font-size: 1.6rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .logo img {
+        height: 60px;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      .card img {
+        max-width: 60px;
+      }
+      .highlight img {
+        max-width: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" role="navigation" aria-label="Primary Navigation">
+    <a href="home.html" class="logo" aria-label="Home">
+      <img src="SAMREEN MSB Logo - Finalll PDF (1) copy.png" alt="Samreen Real Estate & Builders Logo" loading="lazy" />
+    </a>
+    <ul class="nav-menu" role="menubar" id="primary-menu">
+      <li><a href="1page.html" role="menuitem">Home</a></li>
+      <li><a href="2abt.html" role="menuitem">About Us</a></li>
+      <li><a href="3services.html" role="menuitem" class="active">Services</a></li>
+      <li><a href="4blog.html" role="menuitem">Blog</a></li>
+      <li><a href="5contact.html" role="menuitem">Contact</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-menu" type="button">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </nav>
+
+  <section class="hero" aria-label="Hero Section">
+    <div class="overlay">
+      <h1 id="heroTitle">Our Services in Thiruvannamalai</h1>
+      <p>Comprehensive real estate solutions with 25+ years of expertise</p>
+      <button class="cta" aria-label="Contact us" onclick="location.href='contact.html'">Get in Touch</button>
+    </div>
+  </section>
+
+  <section id="services" aria-label="Services Section">
+    <h2>Our Services</h2>
+    <div class="cards" role="list">
+      <article class="card" role="listitem" tabindex="0">
+        <img src="landforsale.jpeg" alt="Residential plot of land" loading="lazy" />
+        <h3>Plots for Sale</h3>
+        <p>Secure, appreciating land in both emerging and established neighborhoods, ideal for families, investors, and NRI buyers.</p>
+      </article>
+      <article class="card" role="listitem" tabindex="0">
+        <img src="building construction.avif" alt="Building under construction" loading="lazy" />
+        <h3>Building Construction</h3>
+        <p>Dream homes and investment properties built with local craftsmanship and modern quality standards.</p>
+      </article>
+      <article class="card" role="listitem" tabindex="0">
+        <img src="visit consulting.jpg" alt="Map with location markers" loading="lazy" />
+        <h3>Site Visit Consulting</h3>
+        <p>Free, no-obligation site visits to explore properties, neighborhood highlights, and documentation guidance.</p>
+      </article>
+      <article class="card" role="listitem" tabindex="0">
+        <img src="investmentadvisory.jpeg" alt="Financial investment chart" loading="lazy" />
+        <h3>Investment Advisory</h3>
+        <p>Expert guidance to select properties with good appreciation potential and rental income.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="highlights" aria-label="Service Highlights">
+    <h2>How We Add Value</h2>
+    <div class="highlight-items" role="list">
+      <article class="highlight" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85" alt="Legal documents for title verification" loading="lazy" />
+        <h3>Title Verification</h3>
+        <p>Expert verification and documentation to ensure clear titles and smooth transactions.</p>
+      </article>
+      <article class="highlight" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" alt="Checklist for registration" loading="lazy" />
+        <h3>End-to-End Registration</h3>
+        <p>Complete assistance throughout the registration process for hassle-free ownership.</p>
+      </article>
+      <article class="highlight" role="listitem" tabindex="0">
+        <img src="cutomerservice.jpeg" alt="Customer support headset" loading="lazy" />
+        <h3>Post-Sale Assistance</h3>
+        <p>Ongoing support to guide maintenance and other concerns after purchase.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="visual-cta" aria-label="Call to Action">
+    <h2>Ready to Explore Our Services?</h2>
+    <button class="cta-button" aria-label="Contact us" onclick="location.href='contact.html'">Contact Us Now</button>
+  </section>
+
+  <footer role="contentinfo">
+    <p>© 2025 Samreen Real Estate. All rights reserved. | Current Date & Time: 05:30 PM IST, Monday, July 28, 2025</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.querySelector('.hamburger');
+      const menu = document.querySelector('.nav-menu');
+      const navbar = document.querySelector('nav.navbar');
+
+      hamburger.addEventListener('click', () => {
+        const isActive = hamburger.classList.toggle('active');
+        menu.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isActive);
+      });
+
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          menu.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+          menu.classList.remove('active');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Navbar background on scroll
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // Animate sections and their children with stagger effect on scroll
+      const sections = document.querySelectorAll('section.hero, section#services, section.highlights, section.visual-cta');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const children = entry.target.querySelectorAll('*');
+              let delay = 0;
+              const delayIncrement = 200; // 200ms delay between each child
+
+              // Apply visible class to section first
+              entry.target.classList.add('visible');
+
+              // Then apply to children with staggered delays
+              children.forEach(child => {
+                setTimeout(() => {
+                  child.classList.add('visible');
+                }, delay);
+                delay += delayIncrement;
+              });
+
+              observer.unobserve(entry.target); // Animate once
+            }
+          });
+        }, { threshold: 0.3 });
+
+        sections.forEach(section => observer.observe(section));
+      } else {
+        sections.forEach(section => {
+          section.classList.add('visible');
+          const children = section.querySelectorAll('*');
+          children.forEach(child => child.classList.add('visible'));
+        });
+      }
+    });
+  </script>
+</body>
+</html>

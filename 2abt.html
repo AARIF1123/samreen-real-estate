@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us | Samreen Real Estate & Builders</title>
+  <meta name="description" content="Learn about the story, mission, leadership, and values behind Samreen Real Estate & Builders—serving Thiruvannamalai for 25+ years." />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #143642;
+      --secondary: #F9AA33;
+      --accent-light: #E5E5E5;
+      --accent-lighter: #F5F5F7;
+      --text-primary: #222222;
+      --success: #22A699;
+      --font-primary: 'Montserrat', sans-serif;
+      --font-secondary: 'Lato', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-secondary);
+      background: linear-gradient(135deg, var(--accent-light), var(--accent-lighter));
+      color: var(--text-primary);
+      line-height: 1.5;
+      min-height: 100vh;
+      padding-top: 60px;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Fade-in animation for sections */
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { opacity: 0; }
+    .fade-in.visible {
+      opacity: 1;
+      animation: fadeInUp 0.8s cubic-bezier(.23,.91,.58,1.01) forwards;
+    }
+
+    /* Slide-in animation for mission-vision block (from right) */
+    @keyframes slideInFromRight {
+      0% { opacity: 0; transform: translateX(100%);}
+      100% { opacity: 1; transform: translateX(0);}
+    }
+    .mission-vision {
+      opacity: 0;
+    }
+    .mission-vision.visible {
+      opacity: 1;
+      animation: slideInFromRight 0.7s ease forwards;
+    }
+
+    /* Slide-in from left animation for leadership team cards */
+    @keyframes slideInFromLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    .leadership-section .team-card {
+      opacity: 0;
+    }
+    .leadership-section .team-card.animated {
+      animation: slideInFromLeft 0.7s ease forwards;
+    }
+    .leadership-section .team-card.animated:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+    .leadership-section .team-card.animated:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+    .leadership-section .team-card.animated:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    /* Slide-in from top animation for how-we-work section */
+    @keyframes slideInFromTop {
+      0% {
+        opacity: 0;
+        transform: translateY(-100%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .how-we-work {
+      opacity: 0;
+    }
+    .how-we-work.visible {
+      animation: slideInFromTop 0.7s ease forwards;
+    }
+
+    /* Slide-in from right animation for values-section list items with stagger */
+    @keyframes slideInFromRight {
+      0% {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    .values-section ul li {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    .values-section ul li.visible {
+      animation: slideInFromRight 0.6s ease forwards;
+    }
+
+    /* NAVIGATION */
+    nav.navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: transparent;
+      z-index: 1100;
+      padding: 0.8rem 2rem;
+      transition: background-color 0.3s ease;
+    }
+    nav.navbar.scrolled {
+      background: rgba(20,54,66,0.90);
+      box-shadow: 0 2px 8px rgba(20,54,66,0.3);
+    }
+    .logo img {
+      height: 110px;
+      width: auto;
+      object-fit: contain;
+      user-select: none;
+      transition: height 0.3s;
+    }
+    ul.nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-left: auto;
+    }
+    ul.nav-menu li a {
+      color: #E5E5E5;
+      padding: 0.4rem 0.6rem;
+      border-radius: 5px;
+      transition: color 0.3s ease;
+      display: block;
+    }
+    ul.nav-menu li a.active,
+    ul.nav-menu li a:hover,
+    ul.nav-menu li a:focus {
+      color: var(--secondary);
+      outline: none;
+    }
+    button.hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      margin-left: auto;
+      user-select: none;
+      z-index: 1200;
+    }
+    button.hamburger .bar {
+      width: 30px; height: 4px; background: #F5F5F7;
+      border-radius: 2px; transition: all 0.3s ease;
+    }
+    button.hamburger.active .bar:nth-child(1) {
+      transform: translateY(10px) rotate(45deg);
+    }
+    button.hamburger.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    button.hamburger.active .bar:nth-child(3) {
+      transform: translateY(-10px) rotate(-45deg);
+    }
+    @media (max-width: 768px) {
+      .logo img { height: 80px; }
+      ul.nav-menu {
+        position: fixed;
+        top: 80px; right: 1rem;
+        background: rgba(20,54,66,0.95);
+        flex-direction: column;
+        width: 250px; max-width: 75vw;
+        padding: 1.5rem; border-radius: 8px;
+        display: none; opacity: 0; gap: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+        transition: opacity 0.3s ease; z-index: 1400;
+      }
+      ul.nav-menu.active { display: flex; opacity: 1; }
+      ul.nav-menu li a { font-size: 1.2rem; padding: 0.75rem; }
+      button.hamburger { display: flex; }
+    }
+    @media (max-width: 480px) {
+      .logo img { height: 60px; }
+    }
+
+    /* MAIN CONTENT */
+    main {
+      max-width: 1050px;
+      margin: 0 auto 3rem auto;
+      padding: 1rem;
+    }
+    h1, h2, h3 {
+      font-family: var(--font-primary);
+      color: var(--primary);
+      margin-bottom: 0.6rem;
+      line-height: 1.15;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 2.2rem;
+      margin-bottom: 1rem;
+    }
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    p, ul {
+      font-family: var(--font-secondary);
+      font-size: 0.94rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+    ul {
+      padding-left: 1.25rem;
+      list-style: disc;
+    }
+    .about-block {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.8rem 1.5rem;
+      box-shadow: 0 2px 10px rgba(20,54,66,0.1);
+      margin-bottom: 2rem;
+      color: var(--primary);
+    }
+    .section-flex {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      background: var(--accent-lighter);
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 2.5rem;
+      color: var(--primary);
+      font-size: 0.9rem;
+    }
+    .section-flex > div {
+      flex: 1 1 320px;
+      min-width: 260px;
+    }
+    strong {
+      color: var(--secondary);
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 1.05em;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .leadership-section {
+      background: var(--accent-lighter);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 2px 12px rgba(20,54,66,0.1);
+      margin-bottom: 2.5rem;
+      color: var(--primary);
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .leadership-title {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: var(--font-primary);
+      color: var(--primary);
+      text-align: center;
+    }
+    .team-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.6rem;
+    }
+    .team-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 1px 8px rgba(20,54,66,0.08);
+      padding: 1rem;
+      text-align: center;
+      width: 280px;
+      user-select: none;
+      opacity: 0;
+    }
+    .team-card img {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 4px solid var(--primary);
+    }
+    .team-card .name {
+      font-family: var(--font-primary);
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.13rem;
+      margin-bottom: 0.15rem;
+    }
+    .team-card .role {
+      font-family: var(--font-primary);
+      color: var(--success);
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .team-card .desc {
+      font-family: var(--font-secondary);
+      font-size: 0.96rem;
+      color: var(--text-primary);
+      line-height: 1.45;
+    }
+    .how-we-work {
+      background: var(--accent-lighter);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(20,54,66,0.1);
+      padding: 1.8rem 2rem;
+      color: var(--primary);
+      font-family: var(--font-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 2.5rem;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0;
+    }
+    .how-we-work.visible {
+      animation: slideInFromTop 0.7s ease forwards;
+    }
+    .how-we-work h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      text-align: left;
+      font-family: var(--font-primary);
+    }
+    .how-we-work ul {
+      list-style: disc;
+      padding-left: 1.5rem;
+    }
+    .values-section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.8rem 2rem;
+      margin-bottom: 2.5rem;
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--primary);
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .values-section h2 {
+      margin-top:0;
+      margin-bottom: 1rem;
+    }
+    .values-section ul {
+      padding-left: 1.5rem;
+      list-style-type: disc;
+    }
+    .values-section ul li {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    .values-section ul li.visible {
+      animation: slideInFromRight 0.6s ease forwards;
+    }
+    /* Slide and fade animation for values-section list items */
+    @keyframes slideInFromRight {
+      0% {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    .why-choose-section {
+      background: var(--success);
+      border-radius: 12px;
+      padding: 2.5rem 1.5rem;
+      margin-bottom: 3rem;
+      color: #fff;
+      font-family: var(--font-primary);
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(34,166,153,0.2);
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .why-choose-section h2 {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1.8rem;
+      margin-top: 0;
+    }
+    .why-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .why-point {
+      max-width: 280px;
+      background: rgba(20,54,66,0.15);
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 500;
+      box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+      user-select: text;
+    }
+    .why-point strong {
+      color: #fff;
+      font-family: var(--font-primary);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    @media (max-width: 960px) {
+      .section-flex, .leadership-section, .how-we-work, .values-section, .why-choose-section {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        max-width: none;
+      }
+      .section-flex {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .team-list {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .how-we-work ul {
+        padding-left: 1rem;
+      }
+      .values-section ul, .why-choose-section .why-points {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+    @media (max-width: 640px) {
+      main {
+        padding: 1rem 1rem;
+      }
+      h1 {
+        font-size: 1.7rem;
+      }
+      h2 {
+        font-size: 1.3rem;
+      }
+      h3 {
+        font-size: 1rem;
+      }
+      .team-card {
+        max-width: 100%;
+        padding: 1rem 1rem;
+      }
+      .team-card img {
+        height: 150px;
+      }
+    }
+    footer {
+      background-color: var(--primary);
+      color: var(--secondary);
+      text-align: center;
+      padding: 1.6rem 1rem;
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.2px;
+      user-select: none;
+      margin-top: 2rem;
+      border-radius: 16px 16px 0 0;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" role="navigation" aria-label="Primary Navigation">
+    <a href="home.html" class="logo" aria-label="Samreen Real Estate Home">
+      <img src="SAMREEN MSB Logo - Finalll PDF (1) copy.png" alt="Samreen Real Estate & Builders Logo" loading="lazy"/>
+    </a>
+    <ul class="nav-menu" role="menubar" id="primary-menu">
+      <li role="none"><a href="1page.html" role="menuitem">Home</a></li>
+      <li role="none"><a href="2abt.html" role="menuitem" class="active">About Us</a></li>
+      <li role="none"><a href="3services.html" role="menuitem">Services</a></li>
+      <li role="none"><a href="4blog.html" role="menuitem">Blog</a></li>
+      <li role="none"><a href="5contact.html" role="menuitem">Contact</a></li>
+    </ul>
+    <button type="button" class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </nav>
+  <br />
+  <br />
+  <main>
+    <section class="about-block fade-in" aria-label="About Block">
+      <h1>About Samreen Real Estate & Builders</h1>
+      <p>With over 25 years in Thiruvannamalai’s real estate market, Samreen Real Estate & Builders has helped hundreds of families and investors secure prime plots and build dream homes. Our unmatched local expertise covers both land and residential buildings—guided by trust, transparency, and an eye for long-term value.</p>
+    </section>
+    <section class="section-flex fade-in" aria-label="Our Story and Mission & Vision">
+      <div class="story">
+        <h2>Our Story</h2>
+        <p>Samreen Real Estate & Builders began its journey over 25 years ago, with a clear mission: making property buying simple, safe, and rewarding for everyone in Thiruvannamalai. Today, we combine deep-rooted local knowledge with modern construction techniques to deliver exceptional value to our customers.</p>
+      </div>
+      <div class="mission-vision">
+        <h2>Mission &amp; Vision</h2>
+        <p><strong>Mission:</strong> To empower clients to make informed real estate investments and create quality living spaces in Thiruvannamalai.</p>
+        <p><strong>Vision:</strong> To be the leading choice for property and building solutions, recognised for our reliability, customer care, and commitment to excellence.</p>
+      </div>
+    </section>
+    <section class="leadership-section fade-in" aria-label="Our Leadership Team">
+      <h2 class="leadership-title">Our Leadership Team</h2>
+      <div class="team-list" role="list">
+        <div class="team-card" role="listitem" tabindex="0">
+          <img src="managing director.jpeg" alt="B. Mohammed Iliyas" loading="lazy"/>
+          <div class="name">B. Mohammed Iliyas</div>
+          <div class="role">Managing Director</div>
+          <div class="desc">Managing Director with over two decades of leadership, driving Samreen’s vision with strategic expertise.</div>
+        </div>
+        <div class="team-card" role="listitem" tabindex="0">
+          <img src="yuvaraj.jpeg" alt="G. Yuvaraj" loading="lazy"/>
+          <div class="name">G. Yuvaraj</div>
+          <div class="role">Manager</div>
+          <div class="desc">Manager with a keen focus on operational excellence and client satisfaction.</div>
+        </div>
+        <div class="team-card" role="listitem" tabindex="0">
+          <img src="abbas.jpeg" alt="B. Abbas" loading="lazy"/>
+          <div class="name">B. Abbas</div>
+          <div class="role">Director</div>
+          <div class="desc">Director bringing extensive industry knowledge and innovative solutions to the team.</div>
+        </div>
+      </div>
+    </section>
+    <section class="how-we-work" aria-label="How We Work">
+      <h2>How We Work</h2>
+      <ul>
+        <li>Listen to your requirements</li>
+        <li>Show you the best available plots/buildings</li>
+        <li>Arrange free site visits and detailed walkthroughs</li>
+        <li>Assist with documentation and legalities</li>
+        <li>Handover with complete satisfaction</li>
+      </ul>
+    </section>
+    <section class="values-section" aria-label="Our Values and Commitment">
+      <h2>Our Values & Commitment</h2>
+      <ul>
+        <li>Integrity & Transparency</li>
+        <li>Local Expertise</li>
+        <li>Customer-First Approach</li>
+        <li>Long-Term Relationships</li>
+        <li>Quality & Reliability</li>
+        <li>Continuous Improvement</li>
+      </ul>
+    </section>
+    <section class="why-choose-section fade-in" aria-label="Why Choose Us">
+      <h2>Why Choose Us?</h2>
+      <div class="why-points">
+        <div class="why-point">
+          <strong>25+ Years’ Experience</strong><br />
+          Local expertise trusted by families and investors.
+        </div>
+        <div class="why-point">
+          <strong>Transparent Process</strong><br />
+          Every step is clear and hassle-free, with no hidden charges.
+        </div>
+        <div class="why-point">
+          <strong>Dedicated Team</strong><br />
+          Seasoned professionals committed to customer care and timely project delivery.
+        </div>
+        <div class="why-point">
+          <strong>After-Sales Support</strong><br />
+          Ongoing help and advice, even after you purchase or build.
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer role="contentinfo">
+    © 2025 Samreen Real Estate. All rights reserved.
+  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.querySelector('.hamburger');
+      const menu = document.querySelector('.nav-menu');
+      const navbar = document.querySelector('nav.navbar');
+
+      hamburger.addEventListener('click', () => {
+        const isActive = hamburger.classList.toggle('active');
+        menu.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isActive);
+      });
+
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menu.classList.remove('active');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+          menu.classList.remove('active');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Navbar background change on scroll
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // Fade-in on scroll Intersection Observer for .fade-in
+      const fadeEls = document.querySelectorAll('.fade-in');
+      if ('IntersectionObserver' in window) {
+        const fadeObserver = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.23 });
+        fadeEls.forEach(el => fadeObserver.observe(el));
+      } else {
+        fadeEls.forEach(el => el.classList.add('visible'));
+      }
+
+      // Slide-in for mission-vision only
+      const missionVision = document.querySelector('.mission-vision');
+      if ('IntersectionObserver' in window && missionVision) {
+        const missionObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.3 });
+        missionObserver.observe(missionVision);
+      } else {
+        if (missionVision) missionVision.classList.add('visible');
+      }
+
+      // Slide-in from left animation for each leadership team card
+      const teamCards = document.querySelectorAll('.leadership-section .team-card');
+      if ('IntersectionObserver' in window) {
+        const teamObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animated');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.3 });
+        teamCards.forEach(card => teamObserver.observe(card));
+      } else {
+        teamCards.forEach(card => card.classList.add('animated'));
+      }
+
+      // Slide-in from top animation for how-we-work section
+      const howWeWorkSection = document.querySelector('.how-we-work');
+      if ('IntersectionObserver' in window && howWeWorkSection) {
+        const howObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.3 });
+        howObserver.observe(howWeWorkSection);
+      } else {
+        if (howWeWorkSection) howWeWorkSection.classList.add('visible');
+      }
+
+      // Slide-in from right animation with stagger for values-section list items
+      const valuesSection = document.querySelector('.values-section');
+      if ('IntersectionObserver' in window && valuesSection) {
+        const listItems = valuesSection.querySelectorAll('ul li');
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              listItems.forEach((li, index) => {
+                setTimeout(() => {
+                  li.classList.add('visible');
+                }, index * 200);
+              });
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.3 });
+        observer.observe(valuesSection);
+      } else {
+        // Fallback: animate immediately
+        const listItems = document.querySelectorAll('.values-section ul li');
+        listItems.forEach(li => li.classList.add('visible'));
+      }
+    });
+  </script>
+</body>
+</html>

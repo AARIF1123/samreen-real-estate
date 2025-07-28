@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="title" content="Contact Samreen Real Estate & Builders | Book Free Site Visit">
+  <meta name="description" content="Ready to buy a plot or home in Thiruvannamalai? Get in touch for free consultations and site visits. Experienced, trusted property partners">
+  <title>Contact - Samreen Real Estate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Lato', sans-serif;
+      background: linear-gradient(135deg, #E5E5E5, #F5F5F7);
+      color: #222222;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: transparent;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+    .navbar.scrolled {
+      background: rgba(20, 54, 66, 0.95);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      margin-right: 25px;
+      min-width: 130px;
+    }
+    .logo img {
+      height: 110px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+      user-select: none;
+      transition: height 0.3s ease;
+    }
+    @media (max-width: 768px) {
+      .logo img {
+        height: 80px;
+      }
+    }
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin-left: auto;
+    }
+    .nav-menu li a {
+      text-decoration: none;
+      color: #E5E5E5;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+      position: relative;
+      padding: 0.25rem 0;
+    }
+    .nav-menu li a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: #F9AA33;
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    .nav-menu li a:hover::after,
+    .nav-menu li a.active::after {
+      width: 100%;
+    }
+    .nav-menu li a:hover,
+    .nav-menu li a.active {
+      color: #F9AA33;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      margin-left: auto;
+      padding-left: 1rem;
+      z-index: 11000;
+      user-select: none;
+    }
+    .bar {
+      width: 30px;
+      height: 4px;
+      background: #F5F5F7;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+    .hamburger.active .bar:nth-child(1) {
+      transform: translateY(10px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(3) {
+      transform: translateY(-10px) rotate(-45deg);
+    }
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+      .nav-menu {
+        position: absolute;
+        top: 100%;
+        right: 1rem;
+        background: rgba(20, 54, 66, 0.95);
+        flex-direction: column;
+        width: 250px;
+        display: none;
+        padding: 1.5rem;
+        gap: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        transition: opacity 0.3s ease;
+      }
+      .nav-menu.active {
+        display: flex;
+        opacity: 1;
+      }
+      .nav-menu li a {
+        font-size: 1.2rem;
+      }
+    }
+
+    .hero-section {
+      text-align: center;
+      padding: 6rem 2rem 2rem 2rem;
+      color: #222222;
+      position: relative;
+      margin-top: 80px;
+      transition: padding 0.3s ease;
+    }
+    .hero-section p {
+      font-size: 1.6rem;
+      font-weight: 400;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .hero-section p.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .cta-button {
+      display: inline-block;
+      background: #22A699;
+      color: #FFFFFF;
+      padding: 1rem 2.5rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 12px rgba(34, 166, 153, 0.3);
+    }
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(34, 166, 153, 0.5);
+    }
+    .contact-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+    
+    .contact-card {
+      background: #F5F5F7;
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.5s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .contact-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .contact-card:hover {
+      transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      color: #143642;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      text-shadow: 1px 1px 3px rgba(20, 54, 66, 0.1);
+      transition: color 0.3s ease;
+    }
+    .contact-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .contact-form label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      color: #222222;
+      margin-bottom: 0.3rem;
+      transition: color 0.3s ease;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      padding: 0.9rem;
+      border: 2px solid #E5E5E5;
+      border-radius: 8px;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #F9AA33;
+      transform: scale(1.02);
+      outline: none;
+    }
+    .contact-form textarea {
+      height: 150px;
+      resize: vertical;
+    }
+    .contact-form button {
+      background: #22A699;
+      color: #FFFFFF;
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .contact-form button:hover {
+      background: #F9AA33;
+      color: #143642;
+      transform: translateY(-2px);
+    }
+    .contact-details div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    .contact-details div:hover {
+      transform: translateX(10px);
+    }
+    .contact-details i {
+      color: #F9AA33;
+      margin-right: 1rem;
+      font-size: 1.4rem;
+      transition: color 0.3s ease;
+    }
+    .contact-details p {
+      font-family: 'Lato', sans-serif;
+      color: #222222;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+    .map-section iframe {
+      width: 100%;
+      height: 350px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .map-section:hover iframe {
+      transform: scale(1.01);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+    .social-links {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+    .social-links a {
+      color: #22A699;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .social-links a:hover {
+      color: #F9AA33;
+      transform: scale(1.1);
+    }
+    footer {
+      background: linear-gradient(90deg, #143642, #1A5F7A);
+      color: #E5E5E5;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      transition: background 0.3s ease;
+    }
+    footer:hover {
+      background: linear-gradient(90deg, #1A5F7A, #143642);
+    }
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 4rem 1rem 1.2rem 1rem;
+      }
+      .hero-section p { font-size: 1.3rem; }
+      .contact-container { padding: 1.5rem; }
+      .contact-card { padding: 1.5rem; }
+      h2 { font-size: 1.8rem; }
+      .contact-form input, .contact-form textarea { padding: 0.7rem; }
+      .map-section iframe { height: 250px; }
+      .contact-card:hover { transform: translateY(-5px) rotateX(0deg) rotateY(0deg); }
+      .logo img { height: 80px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="home.html" class="logo">
+      <img src="SAMREEN MSB Logo - Finalll PDF (1) copy.png" alt="Samreen Real Estate & Builders Logo" />
+    </a>
+    <ul class="nav-menu">
+      <li><a href="1page.html">Home</a></li>
+      <li><a href="2abt.html">About Us</a></li>
+      <li><a href="3services.html">Services</a></li>
+      <li><a href="4blog.html">Blog</a></li>
+      <li><a href="5contact.html" class="active">Contact Us</a></li>
+    </ul>
+    <button type="button" class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </nav>
+
+  <section class="hero-section">
+    <p>Unlock your future home or investment with Samreen. Contact us today for expert guidance and a free site visit in Thiruvannamalai.</p>
+    <a href="#contact-form" class="cta-button">Book a Free Site Visit</a>
+  </section>
+
+  <div class="contact-container">
+    <section id="contact-form" class="contact-card contact-form">
+      <h2>Get in Touch</h2>
+      <form  action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="7b82029e-bb29-4028-a5bd-9519ee8bd173">
+
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required placeholder="Enter your name">
+
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required placeholder="Enter your email">
+
+        <label for="phone">Your Phone</label>
+        <input type="tel" id="phone" name="phone" required placeholder="Enter your phone">
+
+        <label for="inquiry">Inquiry Details</label>
+        <textarea id="inquiry" name="inquiry" required placeholder="Describe your needs or questions"></textarea>
+
+        <button type="submit">Schedule a Consultation</button>
+      </form>
+    </section>
+
+    <section class="contact-card contact-details">
+      <h2>Our Contact Information</h2>
+      <div><i class="fas fa-phone"></i><p>[Phone Number]</p></div>
+      <div><i class="fas fa-envelope"></i><p>[Email Address]</p></div>
+      <div><i class="fas fa-map-marker-alt"></i><p>[Office/Plot location, Thiruvannamalai]</p></div>
+    </section>
+
+    <section class="contact-card map-section">
+      <h2>Visit Our Location</h2>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.123456!2d79.123456!3d12.234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDE0JzA2LjAiTiA3OcKwMDcnMjAuMCJF!5e0!3m2!1sen!2sin!4v1626876543!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+    </section>
+
+    <section class="contact-card social-links">
+      <h2>Connect With Us</h2>
+      <div>
+        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+        <a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+        <a href="#" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>© 2025 Samreen Real Estate. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.querySelector('.hamburger');
+      const menu = document.querySelector('.nav-menu');
+      const navbar = document.querySelector('.navbar');
+
+      if (hamburger && menu) {
+        hamburger.addEventListener('click', () => {
+          const isActive = hamburger.classList.toggle('active');
+          menu.classList.toggle('active');
+          hamburger.setAttribute('aria-expanded', isActive);
+        });
+
+        menu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            menu.classList.remove('active');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          });
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!navbar.contains(e.target)) {
+            menu.classList.remove('active');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // Animate in hero text
+      const heroP = document.querySelector('.hero-section p');
+      if (heroP) {
+        window.requestAnimationFrame(() => {
+          heroP.classList.add('visible');
+        });
+      }
+
+      // Animate in all content cards
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      document.querySelectorAll('.contact-card').forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>
